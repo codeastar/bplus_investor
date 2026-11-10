@@ -2,7 +2,7 @@
 
 **Track any fund's 13F-HR stock holdings straight from SEC EDGAR — see what they own now, and exactly what changed since last quarter.**
 
-Why spend 40 hours a week sifting through thousands of stocks when you can piggyback on world-class due diligence? Inspired by Model Distillation in Machine Learning, this project distills your search space down to  pre-screened portfolio. 
+Why spend 40 hours a week sifting through thousands of stocks when you can piggyback on world-class due diligence? Inspired by Model Distillation in Machine Learning, this project distills your search space down to  pre-screened portfolio. It also includes a Buffett-style screener to help analyze stocks and identify potential buying ideas.
 
 📖 Read the full philosophy and tutorial: [How to Build a Warren Buffett Stock Filter in Python Through Distillation](https://www.codeastar.com/become-a-bplus-investor/)
 
@@ -17,6 +17,7 @@ Point it at a fund's CIK (Berkshire Hathaway by default), and it pulls the lates
 - **New positions** the fund just opened
 - **Closed positions** it fully exited
 - **Increased / decreased** positions with share and percentage change
+- **Buffett-style buying screener** to analyze stocks using principles associated with Warren Buffett
 - Human-readable numbers (`$2.50M`, `1.23B`) instead of raw floats
 - Works with **any** SEC filer's CIK, not just Berkshire
 
@@ -71,7 +72,17 @@ uv run main.py
 
 That's it — the script fetches the two most recent 13F-HR filings for the configured CIK and prints the comparison straight to your terminal.
 
-### Example output
+### Buffett-style stock buying analyzer
+
+Use `bbuy.py` to evaluate a stock with Buffett-inspired criteria and get a potential buying idea. For details, see [Build a Python Stock Screener with Yahoo Finance](https://www.codeastar.com/buy-like-warren-buffett-build-a-python-stock-screener-with-yahoo-finance/).
+
+```bash
+uv run bbuy.py AAPL
+```
+
+### Holdings comparison example
+
+The `main.py` holdings report compares the fund's latest two 13F-HR filings:
 
 ```
 Current holdings:
@@ -96,7 +107,7 @@ Comparing [2025-03-31] vs [2025-06-30]
  INCREASED   AAPL Apple Inc    280.00M  300.00M  $71.20B      20.00M          7.14%
 ```
 
-*(sample data for illustration — real output reflects the fund's actual filings)*
+*(Sample data for illustration; real output reflects the fund's filings.)*
 
 
 ## How it works
@@ -112,6 +123,7 @@ Comparing [2025-03-31] vs [2025-06-30]
 ```
 bplus_investor/
 ├── main.py           # Entry point — fetch, compare, and print holdings
+├── bbuy.py           # Buffett-inspired stock buying analyzer
 ├── .env.example       # Template for required environment variables
 └── pyproject.toml     # Project metadata & dependencies
 ```

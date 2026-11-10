@@ -1,14 +1,8 @@
 from email.mime import message
-import os, math
+import os
 from dotenv import load_dotenv
 from edgar import Company, set_identity
-
-def format_human_number(value):
-    if math.isnan(value): return ""
-    val, abs_val = float(value), abs(value)
-    if abs_val < 1000: return f"{val:,.2f}"    
-    idx = min(int(math.log10(abs_val) // 3), 3)
-    return f"{val / (10 ** (idx * 3)):.2f}{['', 'K', 'M', 'B'][idx]}"
+from utility import format_human_number
 
 def display_holdings_changes(changes_df, message, cols_present):
    if not changes_df.empty:
